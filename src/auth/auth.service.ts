@@ -7,11 +7,11 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Auth } from './entities/auth.entity';
 import { JwtService } from '@nestjs/jwt';
-import { MailService } from 'src/utils/services/mail.service';
+import { MailService } from '../utils/services/mail.service';
 import { LoginDto, SignUpDto } from './dtos/auth.dto';
 import * as bcrypt from 'bcryptjs';
 import { ObjectId } from 'mongodb';

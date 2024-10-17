@@ -1,8 +1,9 @@
 {
-  "name": "authentication-service-udea",
+  "name": "@udea/authentication-service-udea",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Authentication Service for UDEA",
+  "main": "./dist/main.js",
+  "author": "udea",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

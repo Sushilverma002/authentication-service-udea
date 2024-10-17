@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Except dist folder
+!/dist
+
+# Also, include package.json and README.md
+!/package.json
+!/README.md

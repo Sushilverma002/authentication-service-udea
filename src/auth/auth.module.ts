@@ -5,12 +5,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { MailService } from 'src/utils/services/mail.service';
+import { MailService } from '../utils/services/mail.service';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { Auth } from './entities/auth.entity';
-import { UsersModule } from 'src/users/users.module';
+import { UsersModule } from '../users/users.module';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
