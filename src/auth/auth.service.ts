@@ -12,7 +12,6 @@ import { Repository } from 'typeorm';
 import { Auth } from './entities/auth.entity';
 import { JwtService } from '@nestjs/jwt';
 import { MailService } from '../utils/services/mail.service';
-import { LoginDto, SignUpDto } from './dtos/auth.dto';
 import * as bcrypt from 'bcryptjs';
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,15 +25,17 @@ export class AuthService {
     private jwtService: JwtService,
     private mailService: MailService,
   ) {}
-  async signUp(signUpDto: SignUpDto): Promise<{
+  async signUp(
+    name: string,
+    email: string,
+    password: string,
+  ): Promise<{
     token: string;
     name: string;
     email: string;
     _id: ObjectId;
   }> {
     try {
-      const { name, email, password } = signUpDto;
-
       let userExist = await this.userRepo.findOneBy({ email: email });
 
       if (userExist) {
@@ -68,14 +69,15 @@ export class AuthService {
     }
   }
 
-  async login(loginDto: LoginDto): Promise<{
+  async login(
+    email: string,
+    password: string,
+  ): Promise<{
     token: string;
     email: string;
     _id: ObjectId;
   }> {
     try {
-      const { email, password } = loginDto;
-
       const user = await this.userRepo.findOneBy({ email });
 
       if (!user) {

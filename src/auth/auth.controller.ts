@@ -1,36 +1,31 @@
 import { Controller, Get, Post, Put, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import {
-  ForgetPasswordDto,
-  SignUpDto,
-  LoginDto,
-  ResetPasswordDto,
-} from './dtos/auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signUp')
-  signUp(@Body() signUpDto: SignUpDto): Promise<{ token: string }> {
-    return this.authService.signUp(signUpDto);
+  signUp(
+    @Body() name: string,
+    email: string,
+    password: string,
+  ): Promise<{ token: string }> {
+    return this.authService.signUp(name, email, password);
   }
 
   @Post('/login')
-  login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
-    return this.authService.login(loginDto);
+  login(@Body() email: string, password: string): Promise<{ token: string }> {
+    return this.authService.login(email, password);
   }
 
   @Post('forget-password')
-  async forgetPassowrd(@Body() forgetPasswordDto: ForgetPasswordDto) {
-    return this.authService.forgetPassword(forgetPasswordDto.email);
+  async forgetPassowrd(@Body() email: string) {
+    return this.authService.forgetPassword(email);
   }
 
   @Put('reset-password')
-  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
-    return this.authService.resetPassword(
-      resetPasswordDto.password,
-      resetPasswordDto.token,
-    );
+  async resetPassword(@Body() token: string, password: string) {
+    return this.authService.resetPassword(password, token);
   }
 }
